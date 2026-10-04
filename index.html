@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1c1c1c">
+  <title>3D Flip Book</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #1c1c1c;
+      overflow: hidden;
+    }
+    #book {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+    }
+  </style>
+  <script>
+    window.PDFJS_LOCALE = {
+      pdfJsWorker: "js/pdf.worker.js",
+      pdfJsCMapUrl: "cmaps/"
+    };
+  </script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/html2canvas.min.js"></script>
+  <script src="js/three.min.js"></script>
+  <script src="js/pdf.min.js"></script>
+  <script>
+    if (window.pdfjsDistBuildPdf && window.pdfjsDistBuildPdf.PDFJS) {
+      window.PDFJS = window.pdfjsDistBuildPdf.PDFJS;
+    }
+  </script>
+  <script src="dist/flip-book.min.js"></script>
+</head>
+<body>
+  <div id="book"></div>
+  <script>
+    (function () {
+      var narrow = window.matchMedia("(max-width: 800px)").matches;
+      jQuery(function () {
+        jQuery("#book").FlipBook({
+          pageCallback: function (n) {
+            return {
+              type: "image",
+              src: "books/theKingIsBlack/" + (n + 1) + ".jpg",
+              interactive: false
+            };
+          },
+          pages: 10,
+          propertiesCallback: function (props) {
+            props.cover.color = 0x000000;
+            return props;
+          },
+          controlsProps: {
+            actions: {
+              cmdSinglePage: {
+                enabled: true,
+                active: narrow
+              }
+            }
+          },
+          template: {
+            html: "templates/default-book-view.html",
+            styles: ["css/short-white-book-view.css?v=2"],
+            links: [{
+              rel: "stylesheet",
+              href: "css/font-awesome.min.css"
+            }],
+            script: "js/default-book-view.js",
+            sounds: {
+              startFlip: "sounds/start-flip.mp3",
+              endFlip: "sounds/end-flip.mp3"
+            }
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
