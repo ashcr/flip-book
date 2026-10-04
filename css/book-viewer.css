@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
   height: 100%;
-  background: #1c1c1c;
+  background: #161616;
   color: #f3f3f3;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -35,87 +35,23 @@ body {
 }
 
 .stage {
+  box-sizing: border-box;
   min-height: 100%;
   min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 64px 56px 28px;
-  box-sizing: border-box;
+  padding: 58px 28px 18px;
 }
 
-.book {
-  position: relative;
-  display: flex;
-  width: calc(var(--page-w) * 2);
-  height: var(--page-h);
-  perspective: 2400px;
-  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.45));
+#book {
+  width: 100%;
+  height: calc(100dvh - 76px);
 }
 
-.book.single {
-  width: var(--page-w);
-}
-
-.sheet {
-  width: var(--page-w);
-  height: var(--page-h);
-  background: #f7f4ee;
-  overflow: hidden;
-  position: relative;
-}
-
-.sheet canvas,
-.face canvas {
-  display: block;
+#book .stf__canvas {
   width: 100%;
   height: 100%;
-}
-
-.leaf {
-  position: absolute;
-  top: 0;
-  width: var(--page-w);
-  height: var(--page-h);
-  transform-style: preserve-3d;
-  z-index: 3;
-  pointer-events: none;
-}
-
-.leaf.next {
-  left: var(--page-w);
-  transform-origin: left center;
-}
-
-.book.single .leaf.next {
-  left: 0;
-}
-
-.leaf.prev {
-  left: 0;
-  transform-origin: right center;
-}
-
-.leaf.turning.next {
-  transform: rotateY(-180deg);
-  transition: transform 0.7s ease;
-}
-
-.leaf.turning.prev {
-  transform: rotateY(180deg);
-  transition: transform 0.7s ease;
-}
-
-.face {
-  position: absolute;
-  inset: 0;
-  background: #f7f4ee;
-  backface-visibility: hidden;
-  overflow: hidden;
-}
-
-.face.back {
-  transform: rotateY(180deg);
 }
 
 .nav {
@@ -128,7 +64,7 @@ body {
   border: 0;
   border-radius: 8px;
   background: transparent;
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(255, 255, 255, 0.82);
   font-size: 54px;
   line-height: 1;
   cursor: pointer;
@@ -139,8 +75,8 @@ body {
   cursor: default;
 }
 
-.nav.prev { left: 6px; }
-.nav.next { right: 6px; }
+.nav.prev { left: 4px; }
+.nav.next { right: 4px; }
 
 .status {
   position: fixed;
@@ -149,7 +85,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #1c1c1c;
+  background: #161616;
   text-align: center;
   padding: 24px;
 }
@@ -204,7 +140,7 @@ body {
 
 @media (max-width: 800px) {
   .stage {
-    padding: 58px 8px 20px;
+    padding: 54px 6px 12px;
   }
   .nav {
     width: 40px;
